@@ -1,0 +1,11 @@
+{application, ez,
+ [
+  {description, "provides a set of commonly used files"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {env, []}
+ ]}.
