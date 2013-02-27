@@ -106,6 +106,7 @@ so in recap:
 - Funs
 	- can be one one line if the are small and have one clause `fun() -> ok end
 	- need to be split across multiple lines if larger or have multiple clauses
+
 ```
 	fun
 		(a) -> ok;
@@ -120,6 +121,7 @@ so in recap:
 	end end
 
 ```
+
 	- funs also should try to keep the last `end` on the same line as the list line of code so:
 		- *this is only for the structure of these tests*
 

@@ -40,7 +40,7 @@ test_loop(M, F, A, N, List) ->
  p_show()->
     fprof:analyse().
 
-while(Fun) when is_fun(Fun)->
+while(Fun) when is_function(Fun,0)->
     case Fun() of
         true -> while(Fun);
         _ -> finished
