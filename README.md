@@ -10,7 +10,8 @@ This application really doesn't do anything except server as a repo for commonly
 
 The eunit structure building macros that I have built allow to build eunit tests very consisely. For example this is what an eunit test might look like normally:
 
-`
+```
+
 private_tests_()->
 [{
 	"this is a description",
@@ -26,12 +27,12 @@ private_tests_()->
 	end
 }]
 
-`
+```
 
 and this is the same eunit test built with my macro
 
 
-`
+```
 
 private_tests_()->
 Tests = [
@@ -45,14 +46,14 @@ Tests = [
 
 ?BUILD_TESTS(Tests).
 
-`
+```
 
 Its a little more consise, but a ton more consise when dealing with mecking the same module over and over again.
 Mostly because it can be abstracted away indie of a ?Macro.
 
 The general structure of the tuple list is as follows:
 
-`
+```
 
 ### Standard
 Tests() :: [Test() | Test()].
@@ -79,7 +80,7 @@ Behavior()	:: {push,Key :: atom(), Value :: any()}
 			|  {pop,Key :: atom()}
 			|  {ret,Value :: any()}
 
-`
+```
 
 
 
