@@ -85,3 +85,78 @@ Behavior()	:: {push,Key :: atom(), Value :: any()}
 
 
 Lots of options there, for the most part I would stick with using the standard mecking behavior, as the extened really has only been used a few time. mostly when testing out functions that need to return differently even though the same parameters are passed. (i.e fun gen_tcp:recv/2)
+
+
+Also this is how I would reccomend that the test be structured so that you don't end up with a large block of brackets at the end of the structure that may or may not be correct.
+
+```
+	[{
+		"Transfer Encoding Chunked identifies the end of the transfer if received from the server"
+		,{baker_http_proxy,proxy,[Server,Client,chunked,<<"0\r\n\r\n">>,unknown]} # always on one line
+		,[{fake_trans, # always on one line
+			[{setopts,fun(_,_)-> ok end} # can be on one line if fun only has 1 caluse and is simple
+			,{send,fun ## needs to be split across multiple lines and indented twice becuase of multiple clauses
+					(client,<<"0\r\n">>)-> ok;
+					(client,<<"\r\n">>)-> ok end}]}]
+		,{extra,<<>>}} # one line unless its a fun, if its a fun the same rules apply as the funs in the meck area.
+	],
+```
+
+so in recap:
+- Funs
+	- can be one one line if the are small and have one clause `fun() -> ok end
+	- need to be split across multiple lines if larger or have multiple clauses
+```
+	fun
+		(a) -> ok;
+		(_) -> bad end
+
+	or 
+
+	fun(A)->
+		case A of
+		a -> ok;
+		_ -> end
+	end end
+
+```
+	- funs also should try to keep the last `end` on the same line as the list line of code so:
+		- *this is only for the structure of these tests*
+
+```
+	good
+	fun() -> ok end
+
+	good
+	fun()->
+		case true of
+			true
+		end end
+
+	bad
+	fun() -> ok
+	end
+```
+- Lists
+	- should e structured so that all elements in the list are at the same indentation
+		- unless
+			- there is a sublist with multiple elements, then the sublist is indented
+			- or the list is small and does not have a lot of elements
+
+```
+	[a,b,c]
+	
+	[{a,true}
+	,{b,true}
+	,{c,true}]
+	
+	[{a,true}
+	,{b,
+		[{test,me}
+		,{once,again}]
+	,{c,true}}]
+
+	List = 	[{a,true}
+			,{b,true}
+			,{c,true}],
+```
