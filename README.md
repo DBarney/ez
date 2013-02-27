@@ -25,12 +25,14 @@ private_tests_()->
 		meck:unload(fake_mod)
 	end
 }]
+
 `
 
 and this is the same eunit test built with my macro
 
 
 `
+
 private_tests_()->
 Tests = [
 	{"this is a description"
@@ -42,13 +44,16 @@ Tests = [
 ],
 
 ?BUILD_TESTS(Tests).
+
 `
+
 Its a little more consise, but a ton more consise when dealing with mecking the same module over and over again.
 Mostly because it can be abstracted away indie of a ?Macro.
 
 The general structure of the tuple list is as follows:
 
 `
+
 ### Standard
 Tests() :: [Test() | Test()].
 Test()	:: {Call :: Call(), Mecks :: Mecks(), Check :: Check()}
@@ -73,6 +78,7 @@ Match()	:: {Args :: [Arg :: any() | Arg :: any()], Behaviors :: [Behavior :: Beh
 Behavior()	:: {push,Key :: atom(), Value :: any()}
 			|  {pop,Key :: atom()}
 			|  {ret,Value :: any()}
+
 `
 
 
