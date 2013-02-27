@@ -2,8 +2,11 @@
 
 -export([
 	test_avg/4,
-    fprof_start/0,
-    prof_stop/0
+    p_start/0,
+    p_start/1,
+    p_stop/0,
+    p_show/0,
+    while/1
 ]).
 
 
@@ -27,6 +30,18 @@ test_loop(M, F, A, N, List) ->
     {T, _Result} = timer:tc(M, F, A),
     test_loop(M, F, A, N - 1, [T|List]).
 
-fprof_start()-> ok.
+ p_start()->  p_start(processes()).
+ p_start(Processes)-> fprof:trace([start,{procs,Processes}]).
 
-fprof_stop()-> ok.
+ p_stop()-> 
+    fprof:trace([stop]),
+    fprof:profile().
+
+ p_show()->
+    fprof:analyse().
+
+while(Fun) when is_fun(Fun)->
+    case Fun() of
+        true -> while(Fun);
+        _ -> finished
+    end.

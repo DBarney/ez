@@ -12,6 +12,10 @@
 					io:format("~ncalling apply"),
 					%% we make the call
 					apply(Mod,Func,Args);
+				{Fun,Args} when ->
+					io:format("~ncalling fun apply"),
+					%% we make the call
+					apply(Fun,Args);
 				Func1 when is_function(Func1,0) ->
 					io:format("~ncalling fun"),
 					Func1();
