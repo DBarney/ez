@@ -12,7 +12,7 @@
 					io:format("~ncalling apply"),
 					%% we make the call
 					apply(Mod,Func,Args);
-				{Fun,Args} when ->
+				{Fun,Args} ->
 					io:format("~ncalling fun apply"),
 					%% we make the call
 					apply(Fun,Args);
