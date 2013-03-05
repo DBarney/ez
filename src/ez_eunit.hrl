@@ -28,7 +28,7 @@
 			unbuild_module(Mock),
 
 			case Response of
-				Resp when is_function(Resp,1) ->
+				Resp when is_function(Resp,1), not is_tuple(Resp) ->
 					?assert(Resp(Result));
 				Response ->
 					%% now we do the assertions
