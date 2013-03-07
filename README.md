@@ -49,7 +49,7 @@ Tests = [
 ```
 
 Its a little more consise, but a ton more consise when dealing with mecking the same module over and over again.
-Mostly because it can be abstracted away indie of a ?Macro.
+Mostly because it can be abstracted away inside of a ?Macro.
 
 The general structure of the tuple list is as follows:
 
