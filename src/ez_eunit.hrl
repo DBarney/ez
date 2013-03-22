@@ -11,15 +11,17 @@
 				{Mod,Func,Args} ->
 					io:format("~ncalling apply"),
 					%% we make the call
-					apply(Mod,Func,Args);
+					catch apply(Mod,Func,Args);
 				{Fun,Args} ->
 					io:format("~ncalling fun apply"),
 					%% we make the call
-					apply(Fun,Args);
+					catch apply(Fun,Args);
 				Func1 when is_function(Func1,0) ->
 					io:format("~ncalling fun"),
-					Func1();
+					catch Func1();
 				Call ->
+					%% we un meck the modules
+					unbuild_module(Mock),
 					throw({wrong,Call})
 			end,
 			io:format("~nresult ~p",[Result]),
