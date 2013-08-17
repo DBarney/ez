@@ -34,10 +34,10 @@
 					?assert(Resp(Result));
 				Response ->
 					%% now we do the assertions
-					?assertMatch(Response,Result)
+					?assertEqual(Response,Result)
 			end
 		end}]
-	end,[{"passing test",fun()-> ok end}],Tests)).
+	end,[{"passing test",fun()-> ok end}],Test)).
 
 
 %% mock a module without options
